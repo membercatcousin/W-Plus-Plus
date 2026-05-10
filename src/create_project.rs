@@ -26,7 +26,7 @@ pub fn create(name: &str, _project_type: &str) {
         { "w": "func ",      "rs": "fn " },
         { "w": "print(",     "rs": "println!("},
         { "w": "pass(",      "rs": "std::process::exit(" },
-        { "w": "#",          "rs": "//" },
+        { "w": "//",          "rs": "//" },
         { "w": "let ",       "rs": "let mut "},
         { "w": "if ",        "rs": "if " },
         { "w": "elif ",      "rs": "else if " },
