@@ -4,4 +4,4 @@ W++ is a  continuation of the W# (spelled as W Sharp) programming language with 
 
 # How to use
 
-There are oficial docs for this languge [here](https://github.com/membercatcousin/W-Plus-Plus/wiki).
+There are oficial docs for this language [here](https://github.com/membercatcousin/W-Plus-Plus/wiki).
