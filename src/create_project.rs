@@ -19,35 +19,13 @@ pub fn create(name: &str, _project_type: &str) {
         return;
     }
 
-    // Create the parse_info.json file with the specified content
-    let json_file_path = format!("{}/parse_info.json", name);
-    let json_content = r##"{
-    "mappings": [
-        { "w": "func ",      "rs": "fn " },
-        { "w": "print(",     "rs": "println!("},
-        { "w": "pass(",      "rs": "std::process::exit(" },
-        { "w": "//",          "rs": "//" },
-        { "w": "let ",       "rs": "let mut "},
-        { "w": "if ",        "rs": "if " },
-        { "w": "elif ",      "rs": "else if " },
-        { "w": "else",       "rs": "else" },
-        { "w": "while ",     "rs": "while " },
-        { "w": "for ",       "rs": "for " },
-        { "w": "loop ",      "rs": "loop " },
-        { "w": "stop",       "rs": "break" },
-        { "w": "true",       "rs": "true" },
-        { "w": "false",      "rs": "false" }
-    ]
-}"##;
-
-    let json_file_path = format!("{}/project.yml", name);
-    let json_content = r#"name:{}
-version: 0.1.0
+    let yaml_file_path = format!("{}/project.yml", name);
+    let yaml_content = r##"version: 0.1.0
 authors: ["Your Name"] 
-"#, name;
+"##;
 
-    if let Err(e) = fs::write(&json_file_path, json_content) {
-        println!("Failed to create file {}: {}", json_file_path, e);
+    if let Err(e) = fs::write(&yaml_file_path, yaml_content) {
+        println!("Failed to create file {}: {}", yaml_file_path, e);
         return;
     }
 

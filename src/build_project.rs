@@ -1,12 +1,23 @@
-
 // W++ Compiler (REWRITEN IN RUST)
 // made by membercatcousin
 // license: GPL v3
 
-
 use std::fs;
 use std::process::Command;
 use serde::Deserialize;
+
+
+const PARSE_INFO_JSON: &str = r##"{
+    "mappings": [
+        { "w": "func ",      "rs": "fn " },
+        { "w": "print(",     "rs": "println!("},
+        { "w": "pass(",      "rs": "std::process::exit(" },
+        { "w": "let ",       "rs": "let mut "},
+        { "w": "if ",        "rs": "if " },
+        { "w": "elif ",      "rs": "else if " },
+        { "w": "stop",       "rs": "break" }
+    ]
+}"##;
 
 #[derive(Deserialize)]
 struct Mapping {
@@ -22,9 +33,9 @@ struct ParseInfo {
 pub fn build(name: &str) {
     println!("Building project {}...", name);
 
-    // Load parse_info.json
-    let parse_info_content = fs::read_to_string("parse_info.json").expect("Failed to read parse_info.json");
-    let parse_info: ParseInfo = serde_json::from_str(&parse_info_content).expect("Failed to parse parse_info.json");
+    // Parse the embedded JSON string directly instead of reading from a file
+    let parse_info: ParseInfo = serde_json::from_str(PARSE_INFO_JSON)
+    .expect("Failed to parse embedded JSON configuration");
 
     // Read the wpp file
     let input_file = format!("src/main.wpp");
@@ -41,11 +52,11 @@ pub fn build(name: &str) {
     // Compile
     println!("[INFO] Building Native Binary...");
     let output = Command::new("rustc")
-        .arg("temp_output.rs")
-        .arg("-o")
-        .arg(name)
-        .status()
-        .expect("Failed to run rustc, make sure you have Rust installed and added to your PATH");
+    .arg("temp_output.rs")
+    .arg("-o")
+    .arg(name)
+    .status()
+    .expect("Failed to run rustc, make sure you have Rust installed and added to your PATH");
 
     if output.success() {
         println!("Success! Run your program with: ./{}", name);

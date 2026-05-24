@@ -39,7 +39,7 @@ fn behaviour_decider(arg1: String, arg2: String, arg3: String) {
             build_project::build(&arg2);
         }
     } else if arg1 == "--h" || arg1 == "--help" {
-        println!("Organized Resource Collection Assembler v1.0.0");
+        println!("Organized Resource Collection Assembler v1.1.0");
         println!("made by membercatcousin");
         println!("license: GPL v3");
         println!("Usage:");
@@ -49,7 +49,9 @@ fn behaviour_decider(arg1: String, arg2: String, arg3: String) {
         println!("  orca --version - Show the version of the ORCA");
 
     } else if arg1 == "--version" {
-        println!("Organized Resource Collection Assembler v1.0.0");
+        println!("Organized Resource Collection Assembler v1.1.0");
+    } else if arg1.is_empty {
+        println!("")
     } else {
         println!("Invalid command: {}. Use 'orca --help' for usage information.", arg1);
     }
